@@ -1,4 +1,4 @@
-package com.dm4nk.unidb.model;
+package com.dm4nk.unidb.model.response;
 
 import lombok.Data;
 

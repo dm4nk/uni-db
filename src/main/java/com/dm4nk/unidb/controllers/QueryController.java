@@ -1,8 +1,8 @@
-package com.dm4nk.unidb;
+package com.dm4nk.unidb.controllers;
 
-import com.dm4nk.unidb.model.OpponentsResponse;
-import com.dm4nk.unidb.model.TicketResponse;
-import com.dm4nk.unidb.model.UserResponse;
+import com.dm4nk.unidb.model.response.OpponentsResponse;
+import com.dm4nk.unidb.model.response.TicketResponse;
+import com.dm4nk.unidb.model.response.UserResponse;
 import org.jooq.DSLContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +16,10 @@ import static org.jooq.impl.DSL.val;
 
 @RestController
 @RequestMapping("api/v1/")
-public class UniDbController {
+public class QueryController {
     private final DSLContext context;
 
-    public UniDbController(DSLContext context) {
+    public QueryController(DSLContext context) {
         this.context = context;
     }
 
@@ -61,6 +61,4 @@ public class UniDbController {
     public List<UserResponse> getUsersWithChildren() {
         return context.fetch(USERS_CHILDREN).into(UserResponse.class);
     }
-
-
 }

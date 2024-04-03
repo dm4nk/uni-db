@@ -72,7 +72,7 @@
             <plugin>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq-codegen-maven</artifactId>
-                <version>3.19.6</version>
+                <version>3.18.13</version>
 
                 <executions>
                     <execution>
