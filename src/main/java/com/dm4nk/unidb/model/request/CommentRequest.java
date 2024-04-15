@@ -11,5 +11,5 @@ public class CommentRequest {
     private UUID ticket;
     private UUID author;
     private String content;
-    private OffsetDateTime createdAt;
+    private String createdAt;
 }

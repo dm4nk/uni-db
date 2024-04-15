@@ -4,6 +4,7 @@ import com.dm4nk.unidb.model.response.OpponentsResponse;
 import com.dm4nk.unidb.model.response.TicketResponse;
 import com.dm4nk.unidb.model.response.UserResponse;
 import org.jooq.DSLContext;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,42 +30,42 @@ public class QueryController {
         this.context = context;
     }
 
-    @GetMapping("users/longestcomments")
-    public List<UserResponse> getUsersWithAverageNetWorthByRole() {
-        return context.fetch(USER_WITH_AVERAGE_NET_WORTH).into(UserResponse.class);
+    @GetMapping("users/average")
+    public ResponseEntity<List<UserResponse>> getUsersWithAverageNetWorthByRole() {
+        return ResponseEntity.ok(context.fetch(USER_WITH_AVERAGE_NET_WORTH).into(UserResponse.class));
     }
 
     @GetMapping("tickets")
-    public List<TicketResponse> getTicketsWithNComments(@RequestParam() int minComments) {
+    public ResponseEntity<List<TicketResponse>> getTicketsWithNComments(@RequestParam() int minComments) {
         if (minComments < 1) {
             throw new RuntimeException("Minimal number of comments must be grater then 0");
         }
-        return context.resultQuery(TICKETS_WITH_N_COMMENTS, val(minComments)).fetch().into(TicketResponse.class);
+        return ResponseEntity.ok(context.resultQuery(TICKETS_WITH_N_COMMENTS, val(minComments)).fetch().into(TicketResponse.class));
     }
 
     @GetMapping("tickets/comments")
-    public List<TicketResponse> getTicketsWithComments() {
-        return context.fetch(TICKETS_WITH_COMMENTS).into(TicketResponse.class);
+    public ResponseEntity<List<TicketResponse>> getTicketsWithComments() {
+        return ResponseEntity.ok(context.fetch(TICKETS_WITH_COMMENTS).into(TicketResponse.class));
     }
 
     @GetMapping("tickets/comments/left")
-    public List<TicketResponse> getTicketsWithCommentsLeft() {
-        return context.fetch(TICKETS_WITH_COMMENTS_LEFT).into(TicketResponse.class);
+    public ResponseEntity<List<TicketResponse>> getTicketsWithCommentsLeft() {
+        return ResponseEntity.ok(context.fetch(TICKETS_WITH_COMMENTS_LEFT).into(TicketResponse.class));
     }
 
     @GetMapping("users/comments")
-    public List<UserResponse> getUsersWithComments() {
-        return context.fetch(USERS_WITH_COMMENTS).into(UserResponse.class);
+    public ResponseEntity<List<UserResponse>> getUsersWithComments() {
+        return ResponseEntity.ok(context.fetch(USERS_WITH_COMMENTS).into(UserResponse.class));
     }
 
     @GetMapping("users/opponents")
-    public List<OpponentsResponse> getPotentialOpponents() {
-        return context.fetch(POTENTIAL_OPPONENTS).into(OpponentsResponse.class);
+    public ResponseEntity<List<OpponentsResponse>> getPotentialOpponents() {
+        return ResponseEntity.ok(context.fetch(POTENTIAL_OPPONENTS).into(OpponentsResponse.class));
     }
 
 
     @GetMapping("users/children")
-    public List<UserResponse> getUsersWithChildren() {
-        return context.fetch(USERS_CHILDREN).into(UserResponse.class);
+    public ResponseEntity<List<UserResponse>> getUsersWithChildren() {
+        return ResponseEntity.ok(context.fetch(USERS_CHILDREN).into(UserResponse.class));
     }
 }

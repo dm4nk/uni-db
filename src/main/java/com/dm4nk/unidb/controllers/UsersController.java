@@ -1,7 +1,6 @@
 package com.dm4nk.unidb.controllers;
 
 import com.dm4nk.unidb.model.request.UserRequest;
-import com.dm4nk.unidb.model.response.UserResponse;
 import org.jooq.DSLContext;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,7 +25,7 @@ public class UsersController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest request) {
+    public ResponseEntity<Void> createUser(@RequestBody UserRequest request) {
         context.insertInto(USERS, USERS.PARENT, USERS.NAME, USERS.ROLE, USERS.NET_WORTH)
                 .values(request.getParent(), request.getName(), request.getRole(), request.getNetWorth())
                 .execute();
@@ -35,7 +34,7 @@ public class UsersController {
     }
 
     @PatchMapping
-    public ResponseEntity<UserResponse> updateUser(@RequestBody UserRequest request) {
+    public ResponseEntity<Void> updateUser(@RequestBody UserRequest request) {
         context.update(USERS)
                 .set(USERS.PARENT, request.getParent())
                 .set(USERS.NAME, request.getName())
@@ -47,7 +46,7 @@ public class UsersController {
     }
 
     @DeleteMapping
-    public ResponseEntity<UserResponse> deleteUser(@RequestParam UUID uuid) {
+    public ResponseEntity<Void> deleteUser(@RequestParam UUID uuid) {
         context.delete(USERS)
                 .where(USERS.ID.eq(uuid))
                 .execute();

@@ -1,7 +1,6 @@
 package com.dm4nk.unidb.controllers;
 
 import com.dm4nk.unidb.model.request.TicketRequest;
-import com.dm4nk.unidb.model.response.CommentResponse;
 import org.jooq.DSLContext;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,7 +25,7 @@ public class TicketsController {
     }
 
     @PostMapping
-    public ResponseEntity<CommentResponse> createTicket(@RequestBody TicketRequest request) {
+    public ResponseEntity<Void> createTicket(@RequestBody TicketRequest request) {
         context.insertInto(TICKETS, TICKETS.REPORTER, TICKETS.ASSIGNEE, TICKETS.DESCRIPTION, TICKETS.TITLE)
                 .values(request.getReporter(), request.getAssignee(), request.getDescription(), request.getTitle())
                 .execute();
@@ -35,7 +34,7 @@ public class TicketsController {
     }
 
     @PatchMapping
-    public ResponseEntity<CommentResponse> updateTicket(@RequestBody TicketRequest request) {
+    public ResponseEntity<Void> updateTicket(@RequestBody TicketRequest request) {
         context.update(TICKETS)
                 .set(TICKETS.REPORTER, request.getReporter())
                 .set(TICKETS.ASSIGNEE, request.getAssignee())
@@ -47,7 +46,7 @@ public class TicketsController {
     }
 
     @DeleteMapping
-    public ResponseEntity<CommentResponse> deleteTicket(@RequestParam UUID uuid) {
+    public ResponseEntity<Void> deleteTicket(@RequestParam UUID uuid) {
         context.delete(TICKETS)
                 .where(TICKETS.ID.eq(uuid))
                 .execute();
