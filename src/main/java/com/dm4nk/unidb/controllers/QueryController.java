@@ -11,7 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static com.dm4nk.unidb.Queries.*;
+import static com.dm4nk.unidb.Queries.POTENTIAL_OPPONENTS;
+import static com.dm4nk.unidb.Queries.TICKETS_WITH_COMMENTS;
+import static com.dm4nk.unidb.Queries.TICKETS_WITH_COMMENTS_LEFT;
+import static com.dm4nk.unidb.Queries.TICKETS_WITH_N_COMMENTS;
+import static com.dm4nk.unidb.Queries.USERS_CHILDREN;
+import static com.dm4nk.unidb.Queries.USERS_WITH_COMMENTS;
+import static com.dm4nk.unidb.Queries.USER_WITH_AVERAGE_NET_WORTH;
 import static org.jooq.impl.DSL.val;
 
 @RestController
